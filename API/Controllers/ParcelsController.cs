@@ -2,15 +2,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
-using API.Entities;
+using API.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ParcelsController : ControllerBase
+        public class ParcelsController : BaseApiController
     {
         private readonly DataContext _context;
         public ParcelsController(DataContext context)
