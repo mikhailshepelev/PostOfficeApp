@@ -8,5 +8,7 @@ namespace API.Model
     {
         public int Id { get; set; }
         public string Number { get; set; }
+        public int ShipmentId { get; set; }
+        public Shipment Shipment { get; set; }
     }
 }

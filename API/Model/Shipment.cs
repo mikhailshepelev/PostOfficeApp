@@ -11,6 +11,6 @@ namespace API.Model
         public Airport Airport { get; set; }
         public string FlightNumber { get; set; }
         public DateTime FlightDate { get; set; }
-        public IList<Bag> bags { get; set; }
+        public IList<Bag> Bags { get; set; }
     }
 }
