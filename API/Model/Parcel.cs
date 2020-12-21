@@ -8,5 +8,7 @@ namespace API.Model
         public string DestinationCountry { get; set; }
         public double Weight { get; set; }
         public double Price { get; set; }
+        public int ParcelsBagId { get; set; }
+        public ParcelsBag ParcelsBag { get; set; }
     }
 }

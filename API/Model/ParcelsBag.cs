@@ -4,6 +4,6 @@ namespace API.Model
 {
     public class ParcelsBag : Bag
     {
-        public IList<Parcel> Parcels { get; set; }
+        public virtual IList<Parcel> Parcels { get; set; }
     }
 }
