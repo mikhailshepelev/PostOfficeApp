@@ -1,7 +1,6 @@
 using API.Model;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 
 namespace API.Data
 {
@@ -19,9 +18,6 @@ namespace API.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            // builder.Entity<ParcelsBag>();
-            // builder.Entity<LettersBag>();
-
             base.OnModelCreating(builder);
 
             builder.Entity<Bag>(entity =>
@@ -30,7 +26,6 @@ namespace API.Data
                     .WithMany(p => p.Bags)
                     .HasForeignKey("ShipmentId");
             });
-
             builder.Entity<Parcel>(entity =>
             {
                 entity.HasOne(d => d.ParcelsBag)
@@ -38,6 +33,17 @@ namespace API.Data
                     .HasForeignKey("ParcelsBagId");
             });
 
+            builder.Entity<Shipment>().Property(t => t.Number).IsRequired();
+            builder.Entity<Shipment>().HasIndex(u => u.Number).IsUnique();
+            builder.Entity<Shipment>().Property(t => t.Airport).IsRequired();
+            builder.Entity<Shipment>().Property(t => t.FlightNumber).IsRequired();
+            builder.Entity<Shipment>().Property(t => t.FlightDate).IsRequired();
+
+            seedDatabase(builder);
+        }
+
+        public void seedDatabase(ModelBuilder builder)
+        {
             Shipment shipment = new Shipment
             {
                 Id = 1,
@@ -67,16 +73,10 @@ namespace API.Data
                 Price = 3.45,
                 ParcelsBagId = 1
             };
-            // shipment.Bags.Add(parcelsBag);
-            // shipment.Bags.Add(lettersBag);
-            // parcelsBag.Parcels.Add(parcel);
 
             builder.Entity<ParcelsBag>().HasData(parcelsBag);
-
             builder.Entity<LettersBag>().HasData(lettersBag);
-
             builder.Entity<Shipment>().HasData(shipment);
-
             builder.Entity<Parcel>().HasData(parcel);
         }
     }

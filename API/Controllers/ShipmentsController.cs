@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using API.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text.RegularExpressions;
 
 namespace API.Controllers
 {
@@ -29,9 +30,11 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<Shipment>> PostShipment(Shipment shipment)
         {
-            _context.Shipments.Add(shipment);
-            await _context.SaveChangesAsync();
-
+            Regex rgx = new Regex("[0-9A-Za-z]{3}-[0-9A-Za-z]{6}");
+            if (rgx.IsMatch(shipment.Number)) {
+                _context.Shipments.Add(shipment);
+                await _context.SaveChangesAsync();
+            }
             return CreatedAtAction(nameof(GetShipment), new { id = shipment.Id }, shipment);
         }
     }
