@@ -22,9 +22,9 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Shipment> GetShipment(int id)
+        public async Task<ActionResult<Shipment>> GetShipment(int id)
         {
-            return _context.Shipments.Find(id); ;
+            return await _context.Shipments.Include(t => t.Bags).SingleOrDefaultAsync(x => x.Id == id);
         }
 
         [HttpPost]

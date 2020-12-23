@@ -39,6 +39,8 @@ namespace API.Data
             builder.Entity<Shipment>().Property(t => t.FlightNumber).IsRequired();
             builder.Entity<Shipment>().Property(t => t.FlightDate).IsRequired();
 
+            builder.Entity<LettersBag>().Property(m => m.Weight).HasPrecision(18, 3);
+
             seedDatabase(builder);
         }
 
@@ -58,8 +60,8 @@ namespace API.Data
                 Id = 2,
                 Number = "HHDF53",
                 LettersCount = 34,
-                Weight = 4.56,
-                Price = 6.56,
+                Weight = 4.563M,
+                Price = 6.56M,
                 ShipmentId = 1
             };
 

@@ -15,6 +15,12 @@ namespace API.Controllers
             _context = context;
         }
 
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Bag>>> GetBags()
+        {
+            return await _context.Bags.ToListAsync();
+        }
+
         [HttpGet("{id}")]
         public ActionResult<Bag> GetBag(int id)
         {
