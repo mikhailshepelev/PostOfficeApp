@@ -22,17 +22,17 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Bag> GetBag(int id)
+        public async Task<ActionResult<Bag>> GetBag(int id)
         {
-            return _context.Bags.Find(id);
-        }
-        [HttpPost]
-        public async Task<ActionResult<ParcelsBag>> PostBag(Bag bag)
-        {
-            _context.Bags.Add(bag);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetBag), new { id = bag.Id }, bag);
+            var bag = _context.Bags.Find(id);
+            if (bag.Discriminator == "ParcelsBag")
+            {
+                return await _context.ParcelsBags.Include(t => t.Parcels).SingleOrDefaultAsync(x => x.Id == id);
+            }
+            else
+            {
+                return _context.LettersBags.Find(id);
+            }
         }
     }
 }

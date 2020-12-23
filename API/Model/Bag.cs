@@ -1,7 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore;
-
-
 namespace API.Model
 {
     public abstract class Bag
@@ -10,5 +6,6 @@ namespace API.Model
         public string Number { get; set; }
         public int ShipmentId { get; set; }
         public Shipment Shipment { get; set; }
+        public string Discriminator { get; set; }
     }
 }

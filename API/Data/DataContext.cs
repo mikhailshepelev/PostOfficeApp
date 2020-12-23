@@ -33,6 +33,8 @@ namespace API.Data
                     .HasForeignKey("ParcelsBagId");
             });
 
+            builder.Entity<Bag>().Property("Discriminator");
+
             builder.Entity<Shipment>().Property(t => t.Number).IsRequired();
             builder.Entity<Shipment>().HasIndex(u => u.Number).IsUnique();
             builder.Entity<Shipment>().Property(t => t.Airport).IsRequired();

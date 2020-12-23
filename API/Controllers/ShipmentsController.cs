@@ -16,7 +16,7 @@ namespace API.Controllers
             _context = context;
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Shipment>>> GetShipments()
+        public async Task<ActionResult<IEnumerable<Shipment>>> GetShipmentsAsync()
         {
             return await _context.Shipments.ToListAsync();
         }
