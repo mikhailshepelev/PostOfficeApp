@@ -1,0 +1,18 @@
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>Number</th>
+            <th>Airport</th>
+            <th>Flight Number</th>
+            <th>Flight Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let tempShipment of shipments">
+            <td>{{tempShipment.number}}</td>
+            <td>{{tempShipment.airport}}</td>
+            <td>{{tempShipment.flightNumber}}</td>
+            <td>{{tempShipment.flightDate}}</td>
+        </tr>
+    </tbody>
+</table>

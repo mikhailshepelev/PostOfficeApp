@@ -12,6 +12,7 @@ namespace API
     public class Startup
     {
         private readonly IConfiguration _config;
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration config)
         {
             _config = config;
@@ -19,6 +20,14 @@ namespace API
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+        {
+            options.AddPolicy(name: MyAllowSpecificOrigins,
+                              builder =>
+                              {
+                                  builder.WithOrigins("http://localhost:4200");
+                              });
+        });
             services.AddDbContext<DataContext>(options =>
             {
                 options.UseSqlServer(_config.GetConnectionString("DefaultConnection"));
@@ -31,6 +40,7 @@ namespace API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
             });
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -46,12 +56,15 @@ namespace API
 
             app.UseRouting();
 
+            app.UseCors(MyAllowSpecificOrigins);
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
         }
     }
 }
