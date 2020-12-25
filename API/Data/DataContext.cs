@@ -52,9 +52,10 @@ namespace API.Data
             {
                 Id = 1,
                 Number = "rtysdf",
-                Airport = Enumerations.Airport.TLL,
+                Airport = "TLL",
                 FlightNumber = "dfsfdsf",
-                FlightDate = DateTime.Now
+                FlightDate = DateTime.Now,
+                isFinalized = false
             };
             ParcelsBag parcelsBag = new ParcelsBag { Id = 1, Number = "AAA445", ShipmentId = 1 };
             LettersBag lettersBag = new LettersBag

@@ -1,3 +1,5 @@
+<h4 class="mt-3 mb-3">Shipments</h4>
+
 <table class="table">
     <thead class="thead-dark">
         <tr>
@@ -5,6 +7,8 @@
             <th>Airport</th>
             <th>Flight Number</th>
             <th>Flight Date</th>
+            <th>View Bags</th>
+            <th>Finalized</th>
         </tr>
     </thead>
     <tbody>
@@ -12,7 +16,11 @@
             <td>{{tempShipment.number}}</td>
             <td>{{tempShipment.airport}}</td>
             <td>{{tempShipment.flightNumber}}</td>
-            <td>{{tempShipment.flightDate}}</td>
+            <td>{{tempShipment.flightDate |  date:'medium' | uppercase}}</td>
+            <td><button class="btn btn-success" (click)="viewBags(tempShipment.id)">View Bags</button> </td>
+            <td *ngIf="tempShipment.isFinalized">YES</td>
+            <td *ngIf="!tempShipment.isFinalized"><button  class="btn btn-success">Finalize</button></td>
         </tr>
     </tbody>
 </table>
+<button type="button" class="btn btn-primary btn-lg mt-3" (click)="createShipment()">Create New Shipment</button>

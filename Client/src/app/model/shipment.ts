@@ -1,7 +1,11 @@
+import { Bag } from "./bag";
+
 export class Shipment {
     id: number;
     number: string;
-    airport: number;
+    airport: string;
     flightNumber: string;
-    flightDate: string;
+    flightDate: Date;
+    isFinalized: boolean;  
+    bags: Bag[]; 
 }

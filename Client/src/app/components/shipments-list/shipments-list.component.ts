@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Shipment } from 'src/app/model/shipment';
 import { ShipmentService } from 'src/app/services/shipment.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shipments-list',
@@ -11,7 +12,8 @@ export class ShipmentsListComponent implements OnInit {
 
   shipments: Shipment[];
 
-  constructor(private shipmentService: ShipmentService) { }
+  constructor(private shipmentService: ShipmentService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.listShipments();
@@ -23,5 +25,13 @@ export class ShipmentsListComponent implements OnInit {
         this.shipments = data;
       }
     )
+  }
+
+  viewBags(id: number) {
+    this.router.navigate(['shipment', id])
+  }
+
+  createShipment() {
+    this.router.navigate(['shipment'])
   }
 }
