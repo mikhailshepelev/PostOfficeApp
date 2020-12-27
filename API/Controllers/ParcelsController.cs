@@ -15,16 +15,18 @@ namespace API.Controllers
             _context = context;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Parcel>>> GetParcels()
+        [HttpPost]
+        public async Task<ActionResult<Parcel>> PostParcel(Parcel parcel)
         {
-            return await _context.Parcels.ToListAsync();
+            _context.Parcels.Add(parcel);
+            await _context.SaveChangesAsync();
+            return CreatedAtAction(nameof(GetParcel), new { id = parcel.Id }, parcel);
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Parcel> GetParcels(int id)
+        public ActionResult<Parcel> GetParcel(int id)
         {
-            return _context.Parcels.Find(id); ;
+            return _context.Parcels.Find(id);
         }
     }
 }

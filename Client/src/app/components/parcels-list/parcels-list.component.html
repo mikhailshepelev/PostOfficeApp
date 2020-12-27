@@ -1,0 +1,27 @@
+<h3 class="mt-3 mb-3">Bag number: {{this.bag.number}}</h3>
+
+<h4 class="mt-3 mb-3">Parcels</h4>
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>Number</th>
+            <th>Recipient Name</th>
+            <th>Destination Country</th>
+            <th>Weight</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let tempParcel of parcels">
+            <td>{{tempParcel.number}}</td>
+            <td>{{tempParcel.recipientName}}</td>
+            <td>{{tempParcel.destinationCountry}}</td>
+            <td>{{tempParcel.weight}}</td>
+            <td>{{tempParcel.price}}</td>
+        </tr>
+    </tbody>
+    <button type="button" class="btn btn-primary mt-3" (click)="createParcel(this.bag.shipmentId, this.bag.id)">Create new parcel</button>
+</table>
+
+<button type="button" class="btn btn-secondary mt-5" (click) = "backClicked()">Back to bags list page</button>

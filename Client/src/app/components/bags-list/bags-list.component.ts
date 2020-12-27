@@ -14,7 +14,6 @@ export class BagsListComponent implements OnInit {
   id: number;
   shipment: Shipment;
   bags: Bag[];
-  parcelsCount: number = 0;
 
   constructor(private shipmentService: ShipmentService,
               private route: ActivatedRoute,
@@ -29,27 +28,19 @@ export class BagsListComponent implements OnInit {
           data => {
             this.shipment = data
             this.bags = this.shipment.bags
-            this.countParcels();
           }
         )
   }
 
-  viewParcels(id: number) {
-
+  viewParcels(shipmentId: number, bagId: number) {
+    this.router.navigate([`shipment/${shipmentId}/bags/${bagId}/parcels`])
   }
 
   createParcelsBag(id: number) {
-    this.router.navigate([`shipment/${id}/parcelsbag`])
+    this.router.navigate([`shipment/${id}/bags/parcelsbag`])
   }
 
-  createLettersBag() {
-  }
-
-  private countParcels() {
-    for (var i = 0; i < this.shipment.bags.length; i++) {
-      if (this.shipment.bags[i].discriminator === 'ParcelsBag') {
-        this.parcelsCount++;
-      }
-    }
+  createLettersBag(id: number) {
+    this.router.navigate([`shipment/${id}/bags/lettersbag`])
   }
 }

@@ -1,3 +1,5 @@
+import { Parcel } from "./parcel";
+
 export class Bag {
     id: number;
     number: string;
@@ -6,4 +8,6 @@ export class Bag {
     discriminator: string;
     weight: number;
     price: number;
+    parcelsCount: number;
+    parcels: Parcel[];
 }

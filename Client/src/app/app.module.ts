@@ -9,6 +9,9 @@ import { ShipmentComponent } from './components/shipment/shipment.component';
 import { FormsModule } from '@angular/forms';
 import { BagsListComponent } from './components/bags-list/bags-list.component';
 import { ParcelsbagComponent } from './components/parcelsbag/parcelsbag.component';
+import { LettersbagComponent } from './components/lettersbag/lettersbag.component';
+import { ParcelsListComponent } from './components/parcels-list/parcels-list.component';
+import { ParcelComponent } from './components/parcel/parcel.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { ParcelsbagComponent } from './components/parcelsbag/parcelsbag.componen
     ShipmentsListComponent,
     ShipmentComponent,
     BagsListComponent,
-    ParcelsbagComponent
+    ParcelsbagComponent,
+    LettersbagComponent,
+    ParcelsListComponent,
+    ParcelComponent
   ],
   imports: [
     BrowserModule,

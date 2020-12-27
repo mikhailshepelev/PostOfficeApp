@@ -1,0 +1,56 @@
+<div>
+    <h3 class="mt-3 mb-3" *ngIf="submitted">Parcel has been successfully created</h3>
+</div>
+<div [hidden]="submitted">
+    <h3 class="mt-3 mb-3">Create new parcel</h3>
+    <form (ngSubmit)="createParcel()" #parcelForm="ngForm">
+        <div class="form-group">
+            <label for="number">Number</label>
+            <input type="text" class="form-control" id="number" required pattern="[a-zA-Z]{2}[0-9]{6}[a-zA-Z]{2}"
+                [(ngModel)]="parcel.number" name="number" #number="ngModel">
+            <div [hidden]="!number.errors?.required || number.untouched" class="alert alert-warning">
+                Number is required
+            </div>
+            <div [hidden]="!number.errors?.pattern || number.untouched" class="alert alert-info">
+                Format should be: “LLNNNNNNLL”, where L – letter, N – digit
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="recipientName">Recipient Name</label>
+            <input type="text" class="form-control" id="recipientName" required maxlength="100"
+                [(ngModel)]="parcel.recipientName" name="recipientName" #recipientName="ngModel">
+            <div [hidden]="!recipientName.errors?.required || recipientName.untouched" class="alert alert-warning">
+                Recipient Name field is required
+            </div>
+        </div>   
+        <div class="form-group">
+            <label for="destinationCountry">Destination Country</label>
+            <input type="text" class="form-control" id="destinationCountry" required pattern="[A-Z]{2}"
+                [(ngModel)]="parcel.destinationCountry" name="destinationCountry" #destinationCountry="ngModel">
+            <div [hidden]="!destinationCountry.errors?.required || destinationCountry.untouched" class="alert alert-warning">
+                Destination Country field is required
+            </div>
+            <div [hidden]="!destinationCountry.errors?.pattern || destinationCountry.untouched" class="alert alert-info">
+                Format should be: 2-letters code, e.g "LV", "EE", "FI"
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="weight">Weight</label>
+            <input type="number" class="form-control" id="weight" required 
+                [(ngModel)]="parcel.weight" name="weight" #weight="ngModel">
+            <div [hidden]="!weight.errors?.required || weight.untouched" class="alert alert-warning">
+                Weight field is required
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="number" class="form-control" id="price" required 
+                [(ngModel)]="parcel.price" name="price" #price="ngModel">
+            <div [hidden]="!price.errors?.required || price.untouched" class="alert alert-warning">
+                Price field is required
+            </div>
+        </div>     
+        <button type="submit" class="btn btn-success" [disabled]="!parcelForm.form.valid">Submit</button>
+    </form>
+</div>
+<button type="button" class="btn btn-secondary mt-5" (click) = "backClicked()">Back to parcels list page</button>

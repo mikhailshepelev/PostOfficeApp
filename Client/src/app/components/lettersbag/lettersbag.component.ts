@@ -5,11 +5,11 @@ import { BagService } from 'src/app/services/bag.service';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-parcelsbag',
-  templateUrl: './parcelsbag.component.html',
-  styleUrls: ['./parcelsbag.component.css']
+  selector: 'app-lettersbag',
+  templateUrl: './lettersbag.component.html',
+  styleUrls: ['./lettersbag.component.css']
 })
-export class ParcelsbagComponent implements OnInit {
+export class LettersbagComponent implements OnInit {
 
   id: number
   bag: Bag
@@ -30,7 +30,7 @@ export class ParcelsbagComponent implements OnInit {
 
   createBag() {
     this.submitted = true;
-    this.bagService.createParcelsBag(this.bag)
+    this.bagService.createLettersBag(this.bag)
         .subscribe (
           data => {
             this.location.back()

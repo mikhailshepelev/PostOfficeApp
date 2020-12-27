@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { keys } from 'src/app/app.constants';
 import { Shipment } from 'src/app/model/shipment';
 import { ShipmentService } from 'src/app/services/shipment.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-shipment',
@@ -17,7 +18,8 @@ export class ShipmentComponent implements OnInit {
 
   constructor(
     private shipmentService: ShipmentService,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
@@ -34,6 +36,10 @@ export class ShipmentComponent implements OnInit {
             this.router.navigate([''])
           }
         )
+  }
+
+  backClicked() {
+    this.location.back();
   }
 }
 

@@ -34,5 +34,22 @@ namespace API.Controllers
                 return _context.LettersBags.Find(id);
             }
         }
+
+        [HttpPost("parcelsbag")]
+        public async Task<ActionResult<ParcelsBag>> PostParcelsBag(ParcelsBag bag)
+        {
+            _context.ParcelsBags.Add(bag);
+            await _context.SaveChangesAsync();
+            return CreatedAtAction(nameof(GetBag), new { id = bag.Id }, bag);
+        }
+
+        [HttpPost("lettersbag")]
+        public async Task<ActionResult<ParcelsBag>> PostLettersBag(LettersBag bag)
+        {
+            _context.LettersBags.Add(bag);
+            await _context.SaveChangesAsync();
+            return CreatedAtAction(nameof(GetBag), new { id = bag.Id }, bag);
+        }
+
     }
 }

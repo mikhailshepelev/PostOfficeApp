@@ -1,36 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Bag } from 'src/app/model/bag';
-import { BagService } from 'src/app/services/bag.service';
+import { Parcel } from 'src/app/model/parcel';
+import { ParcelService } from 'src/app/services/parcel.service';
 import { Location } from '@angular/common';
 
 @Component({
-  selector: 'app-parcelsbag',
-  templateUrl: './parcelsbag.component.html',
-  styleUrls: ['./parcelsbag.component.css']
+  selector: 'app-parcel',
+  templateUrl: './parcel.component.html',
+  styleUrls: ['./parcel.component.css']
 })
-export class ParcelsbagComponent implements OnInit {
+export class ParcelComponent implements OnInit {
 
   id: number
-  bag: Bag
+  parcel: Parcel
   submitted = false;
 
   constructor(
-    private bagService: BagService,
+    private parcelService: ParcelService,
     private route: ActivatedRoute,
     private router: Router,
     private location: Location
   ) { }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.params['id'];
-    this.bag = new Bag();
-    this.bag.shipmentId = this.id;
+    this.id = this.route.snapshot.params['bagid'];
+    this.parcel = new Parcel();
+    this.parcel.parcelsBagId = this.id;
   }
 
-  createBag() {
+  createParcel() {
     this.submitted = true;
-    this.bagService.createParcelsBag(this.bag)
+    this.parcelService.createLettersBag(this.parcel)
         .subscribe (
           data => {
             this.location.back()

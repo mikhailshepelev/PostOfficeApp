@@ -28,7 +28,7 @@ export class ShipmentsListComponent implements OnInit {
   }
 
   viewBags(id: number) {
-    this.router.navigate(['shipment', id])
+    this.router.navigate([`shipment/${id}/bags`])
   }
 
   createShipment() {
