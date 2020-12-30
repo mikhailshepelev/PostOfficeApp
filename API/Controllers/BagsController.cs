@@ -25,7 +25,7 @@ namespace API.Controllers
         public async Task<ActionResult<Bag>> GetBag(int id)
         {
             var bag = _context.Bags.Find(id);
-            if (bag.Discriminator == "ParcelsBag")
+            if (bag.Discriminator == Constants.ParcelsBagDiscriminator)
             {
                 return await _context.ParcelsBags.Include(t => t.Parcels).SingleOrDefaultAsync(x => x.Id == id);
             }
@@ -39,21 +39,29 @@ namespace API.Controllers
         public async Task<ActionResult<ParcelsBag>> PostParcelsBag(ParcelsBag bag)
         {
             _context.ParcelsBags.Add(bag);
-            Shipment shipment = await _context.Shipments.FindAsync(bag.ShipmentId);
-            shipment.bagsCount++;
-            shipment.countOfBagsWithoutParcels++;
+            await ChangeCountProperties(bag);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetBag), new { id = bag.Id }, bag);
         }
 
         [HttpPost("lettersbag")]
-        public async Task<ActionResult<ParcelsBag>> PostLettersBag(LettersBag bag)
+        public async Task<ActionResult<LettersBag>> PostLettersBag(LettersBag bag)
         {
             _context.LettersBags.Add(bag);
-            Shipment shipment = await _context.Shipments.FindAsync(bag.ShipmentId);
-            shipment.bagsCount++;
+            await ChangeCountProperties(bag);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetBag), new { id = bag.Id }, bag);
+        }
+
+        private async Task<ActionResult<Shipment>> ChangeCountProperties(Bag bag) {
+            Shipment shipment = await _context.Shipments.FindAsync(bag.ShipmentId);
+            if (bag.Discriminator == Constants.ParcelsBagDiscriminator) {
+                shipment.bagsCount++;
+                shipment.countOfBagsWithoutParcels++;
+            } else {
+                shipment.bagsCount++;
+            }
+            return shipment;
         }
 
     }

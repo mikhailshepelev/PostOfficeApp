@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Bag } from 'src/app/model/bag';
 import { Shipment } from 'src/app/model/shipment';
 import { ShipmentService } from 'src/app/services/shipment.service';
+import { lettersBagDiscriminator } from 'src/app/app.constants';
+import { parcelsBagDiscriminator } from 'src/app/app.constants';
 
 @Component({
   selector: 'app-bags-list',
@@ -14,6 +16,8 @@ export class BagsListComponent implements OnInit {
   id: number;
   shipment: Shipment;
   bags: Bag[];
+  parcelsBagDisc = parcelsBagDiscriminator;
+  lettersBagDisc = lettersBagDiscriminator;
 
   constructor(private shipmentService: ShipmentService,
               private route: ActivatedRoute,

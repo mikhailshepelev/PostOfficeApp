@@ -12,9 +12,9 @@
     </thead>
     <tbody>
         <tr *ngFor="let tempBag of bags">
-            <td *ngIf="tempBag.discriminator === 'ParcelsBag'">{{tempBag.number}}</td>
-            <td *ngIf="tempBag.discriminator === 'ParcelsBag'">{{tempBag.parcelsCount}}</td>
-            <td *ngIf="tempBag.discriminator === 'ParcelsBag'"><button class="btn btn-success" (click)="viewParcels(shipment.id, tempBag.id)">View Parcels</button> </td>
+            <td *ngIf="tempBag.discriminator === parcelsBagDisc">{{tempBag.number}}</td>
+            <td *ngIf="tempBag.discriminator === parcelsBagDisc">{{tempBag.parcelsCount}}</td>
+            <td *ngIf="tempBag.discriminator === parcelsBagDisc"><button class="btn btn-success" (click)="viewParcels(shipment.id, tempBag.id)">View Parcels</button> </td>
         </tr>
     </tbody>
     <button type="button" class="btn btn-primary mt-3" *ngIf="!this.shipment.isFinalized" (click)="createParcelsBag(this.shipment.id)">Create new bag with parcels</button>
@@ -33,10 +33,10 @@
     </thead>
     <tbody>
         <tr *ngFor="let tempBag of bags">
-            <td *ngIf="tempBag.discriminator === 'LettersBag'">{{tempBag.number}}</td>
-            <td *ngIf="tempBag.discriminator === 'LettersBag'">{{tempBag.lettersCount}}</td>
-            <td *ngIf="tempBag.discriminator === 'LettersBag'">{{tempBag.weight}}</td>
-            <td *ngIf="tempBag.discriminator === 'LettersBag'">{{tempBag.price}}</td>
+            <td *ngIf="tempBag.discriminator === lettersBagDisc">{{tempBag.number}}</td>
+            <td *ngIf="tempBag.discriminator === lettersBagDisc">{{tempBag.lettersCount}}</td>
+            <td *ngIf="tempBag.discriminator === lettersBagDisc">{{tempBag.weight}}</td>
+            <td *ngIf="tempBag.discriminator === lettersBagDisc">{{tempBag.price}}</td>
         </tr>
     </tbody>
     <button type="button" class="btn btn-primary mt-3" *ngIf="!this.shipment.isFinalized" (click)="createLettersBag(this.shipment.id)">Create new bag with letters</button>

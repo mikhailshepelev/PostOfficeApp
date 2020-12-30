@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Bag } from 'src/app/model/bag';
 import { BagService } from 'src/app/services/bag.service';
 import { Location } from '@angular/common';
+import { lettersBagDiscriminator } from 'src/app/app.constants';
 
 @Component({
   selector: 'app-lettersbag',
@@ -24,6 +25,7 @@ export class LettersbagComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     this.bag = new Bag();
+    this.bag.discriminator = lettersBagDiscriminator;
     this.bag.shipmentId = this.id;
   }
 
