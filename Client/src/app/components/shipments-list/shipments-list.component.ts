@@ -34,4 +34,28 @@ export class ShipmentsListComponent implements OnInit {
   createShipment() {
     this.router.navigate(['shipment'])
   }
+
+  finalize(id: number, flightDate: Date) {
+    if (this.compareDate(new Date(), flightDate) > 0) {
+      console.log(new Date())
+      alert("Flight date of shipment cannot be in the past at the moment of finalizing")
+    } else {
+      this.shipmentService.finalizeShipment(id).subscribe(
+        data => {console.log(data),
+        this.listShipments()
+        }
+      );
+    }
+  }
+
+  compareDate(date1: Date, date2: Date): number
+{
+  let d1 = new Date(date1); let d2 = new Date(date2);
+
+  let same = d1.getTime() === d2.getTime();
+  if (same) return 0;
+
+  if (d1 > d2) return 1;
+  if (d1 < d2) return -1;
+}
 }

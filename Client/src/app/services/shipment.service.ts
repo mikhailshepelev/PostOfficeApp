@@ -25,4 +25,8 @@ export class ShipmentService {
   getShipment(id: number): Observable<Shipment> {
     return this.httpClient.get<Shipment>(`${this.url}/${id}`);
   }
+
+  finalizeShipment(id: number): Observable<any> {
+    return this.httpClient.get<any>(`${this.url}/finalize/${id}`);
+  }
 }

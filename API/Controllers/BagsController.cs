@@ -31,7 +31,7 @@ namespace API.Controllers
             }
             else
             {
-                return _context.LettersBags.Find(id);
+                return await _context.LettersBags.FindAsync(id);
             }
         }
 

@@ -1,9 +1,7 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using API.Data;
 using API.Model;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -24,9 +22,9 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Parcel> GetParcel(int id)
+        public async Task<ActionResult<Parcel>> GetParcel(int id)
         {
-            return _context.Parcels.Find(id);
+            return await _context.Parcels.FindAsync(id);
         }
     }
 }
