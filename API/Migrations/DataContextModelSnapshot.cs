@@ -33,8 +33,11 @@ namespace API.Migrations
                     b.Property<string>("Number")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ShipmentId")
+                    b.Property<int>("ShipmentId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("isFinalized")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -58,7 +61,7 @@ namespace API.Migrations
                     b.Property<string>("Number")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ParcelsBagId")
+                    b.Property<int>("ParcelsBagId")
                         .HasColumnType("int");
 
                     b.Property<double>("Price")
@@ -75,6 +78,18 @@ namespace API.Migrations
                     b.HasIndex("ParcelsBagId");
 
                     b.ToTable("Parcels");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            DestinationCountry = "USA",
+                            Number = "1DD45",
+                            ParcelsBagId = 1,
+                            Price = 3.4500000000000002,
+                            RecipientName = "Michael",
+                            Weight = 2.4500000000000002
+                        });
                 });
 
             modelBuilder.Entity("API.Model.Shipment", b =>
@@ -84,21 +99,49 @@ namespace API.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int>("Airport")
-                        .HasColumnType("int");
+                    b.Property<string>("Airport")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("FlightDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FlightNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Number")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("bagsCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("countOfBagsWithoutParcels")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("isFinalized")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Number")
+                        .IsUnique();
+
                     b.ToTable("Shipments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Airport = "TLL",
+                            FlightDate = new DateTime(2020, 12, 30, 19, 55, 57, 506, DateTimeKind.Local).AddTicks(1340),
+                            FlightNumber = "dfsfdsf",
+                            Number = "rtysdf",
+                            bagsCount = 0,
+                            countOfBagsWithoutParcels = 0,
+                            isFinalized = false
+                        });
                 });
 
             modelBuilder.Entity("API.Model.LettersBag", b =>
@@ -108,39 +151,73 @@ namespace API.Migrations
                     b.Property<int>("LettersCount")
                         .HasColumnType("int");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<double>("Weight")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Weight")
+                        .HasPrecision(18, 3)
+                        .HasColumnType("decimal(18,3)");
 
                     b.HasDiscriminator().HasValue("LettersBag");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 2,
+                            Number = "HHDF53",
+                            ShipmentId = 1,
+                            isFinalized = false,
+                            LettersCount = 34,
+                            Price = 6.56m,
+                            Weight = 4.563m
+                        });
                 });
 
             modelBuilder.Entity("API.Model.ParcelsBag", b =>
                 {
                     b.HasBaseType("API.Model.Bag");
 
+                    b.Property<int>("ParcelsCount")
+                        .HasColumnType("int");
+
                     b.HasDiscriminator().HasValue("ParcelsBag");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Number = "AAA445",
+                            ShipmentId = 1,
+                            isFinalized = false,
+                            ParcelsCount = 0
+                        });
                 });
 
             modelBuilder.Entity("API.Model.Bag", b =>
                 {
-                    b.HasOne("API.Model.Shipment", null)
-                        .WithMany("bags")
-                        .HasForeignKey("ShipmentId");
+                    b.HasOne("API.Model.Shipment", "Shipment")
+                        .WithMany("Bags")
+                        .HasForeignKey("ShipmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Shipment");
                 });
 
             modelBuilder.Entity("API.Model.Parcel", b =>
                 {
-                    b.HasOne("API.Model.ParcelsBag", null)
+                    b.HasOne("API.Model.ParcelsBag", "ParcelsBag")
                         .WithMany("Parcels")
-                        .HasForeignKey("ParcelsBagId");
+                        .HasForeignKey("ParcelsBagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ParcelsBag");
                 });
 
             modelBuilder.Entity("API.Model.Shipment", b =>
                 {
-                    b.Navigation("bags");
+                    b.Navigation("Bags");
                 });
 
             modelBuilder.Entity("API.Model.ParcelsBag", b =>

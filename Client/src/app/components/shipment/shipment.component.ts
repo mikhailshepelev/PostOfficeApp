@@ -27,14 +27,17 @@ export class ShipmentComponent implements OnInit {
   }
 
   createShipment(){
-    this.submitted = true;
     console.log(this.shipment)
     this.shipmentService.createShipment(this.shipment)
         .subscribe (
           data => {
             console.log(data)
+            this.submitted = true;
             this.location.back();
-          }
+          },
+          error => {
+            console.log(error.error);
+          }     
         )
   }
 
