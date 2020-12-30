@@ -21,7 +21,7 @@
             <td>{{tempParcel.price}}</td>
         </tr>
     </tbody>
-    <button type="button" class="btn btn-primary mt-3" (click)="createParcel(this.bag.shipmentId, this.bag.id)">Create new parcel</button>
+    <button type="button" class="btn btn-primary mt-3" *ngIf="!this.bag.isFinalized" (click)="createParcel(this.bag.shipmentId, this.bag.id)">Create new parcel</button>
 </table>
 
 <button type="button" class="btn btn-secondary mt-5" (click) = "backClicked()">Back to bags list page</button>

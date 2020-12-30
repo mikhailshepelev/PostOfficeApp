@@ -28,19 +28,16 @@ namespace API.Controllers
             return await _context.Shipments.Include(t => t.Bags).SingleOrDefaultAsync(x => x.Id == id);
         }
 
-        [HttpGet]
-        [Route("{id}/bags")]
-        public async Task<ActionResult<IEnumerable<Bag>>> GetAllBagsByShipmentId(int id)
-        {
-            return await _context.Bags.Where(b => b.ShipmentId == id).ToListAsync();
-        }
-
         [Route("finalize/{id}")]
         [HttpGet]
         public async Task<ActionResult<Shipment>> FinalizeShipment(int id)
         {
             var shipment = await _context.Shipments.FindAsync(id);
             shipment.isFinalized = true;
+            var bags = await _context.Bags.Where(b => b.ShipmentId == id).ToListAsync();
+            foreach (Bag bag in bags) {
+                bag.isFinalized = true;
+            }
             await _context.SaveChangesAsync();
             return Ok();
         }

@@ -10,4 +10,5 @@ export class Bag {
     price: number;
     parcelsCount: number;
     parcels: Parcel[];
+    isFinalized: boolean;
 }
