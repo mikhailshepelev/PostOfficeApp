@@ -7,11 +7,11 @@
     <div class="form-group">
         <label for="number">Number</label>
         <input type="text" class="form-control" id="number" required pattern="[0-9A-Za-z]{3}-[0-9A-Za-z]{6}"
-            [(ngModel)]="shipment.number" name="number" #number="ngModel">
+            placeholder="'XXX-XXXXXX', where X – letter or digit" [(ngModel)]="shipment.number" name="number" #number="ngModel">
         <div [hidden]="!number.errors?.required || number.untouched" class="alert alert-warning">
             Number is required
         </div>
-        <div [hidden]="!number.errors?.pattern || number.untouched" class="alert alert-info">
+        <div [hidden]="!number.errors?.pattern || number.valid" class="alert alert-info">
             Number should be in format: “XXX-XXXXXX”, where X – letter or digit
         </div>
 
@@ -29,11 +29,11 @@
     <div class="form-group">
         <label for="flightNumber">Flight Number</label>
         <input type="text" class="form-control" id="flightNumber" required pattern="[A-Za-z]{2}[0-9]{4}"
-            [(ngModel)]="shipment.flightNumber" name="flightNumber" #flightNumber="ngModel">
+            placeholder="'LLNNNN', where L - letter, N - digit" [(ngModel)]="shipment.flightNumber" name="flightNumber" #flightNumber="ngModel">
         <div [hidden]="!flightNumber.errors?.required || flightNumber.untouched" class="alert alert-warning">
             Flight Number is required
         </div>
-        <div [hidden]="!flightNumber.errors?.pattern || flightNumber.untouched" class="alert alert-info">
+        <div [hidden]="!flightNumber.errors?.pattern || flightNumber.valid" class="alert alert-info">
             Number should be in format: "LLNNNN", where L - letter, N - digit
         </div>
     </div>

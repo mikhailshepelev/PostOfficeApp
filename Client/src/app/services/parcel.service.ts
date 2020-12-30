@@ -12,7 +12,7 @@ export class ParcelService {
 
   constructor(private httpClient: HttpClient) { }
 
-  createLettersBag(parcel: Parcel) {
+  createParcel(parcel: Parcel) {
     return this.httpClient.post(`${this.url}`, parcel)
   }
 }

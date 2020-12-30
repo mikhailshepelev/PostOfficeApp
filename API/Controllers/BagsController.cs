@@ -39,6 +39,9 @@ namespace API.Controllers
         public async Task<ActionResult<ParcelsBag>> PostParcelsBag(ParcelsBag bag)
         {
             _context.ParcelsBags.Add(bag);
+            Shipment shipment = await _context.Shipments.FindAsync(bag.ShipmentId);
+            shipment.bagsCount++;
+            shipment.countOfBagsWithoutParcels++;
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetBag), new { id = bag.Id }, bag);
         }
@@ -47,6 +50,8 @@ namespace API.Controllers
         public async Task<ActionResult<ParcelsBag>> PostLettersBag(LettersBag bag)
         {
             _context.LettersBags.Add(bag);
+            Shipment shipment = await _context.Shipments.FindAsync(bag.ShipmentId);
+            shipment.bagsCount++;
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetBag), new { id = bag.Id }, bag);
         }

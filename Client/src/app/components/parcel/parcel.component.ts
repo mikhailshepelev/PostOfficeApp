@@ -18,7 +18,6 @@ export class ParcelComponent implements OnInit {
   constructor(
     private parcelService: ParcelService,
     private route: ActivatedRoute,
-    private router: Router,
     private location: Location
   ) { }
 
@@ -30,7 +29,7 @@ export class ParcelComponent implements OnInit {
 
   createParcel() {
     this.submitted = true;
-    this.parcelService.createLettersBag(this.parcel)
+    this.parcelService.createParcel(this.parcel)
         .subscribe (
           data => {
             this.location.back()

@@ -19,7 +19,7 @@
             <td>{{tempShipment.flightDate |  date:'medium' | uppercase}}</td>
             <td><button class="btn btn-success" (click)="viewBags(tempShipment.id)">View Bags</button> </td>
             <td *ngIf="tempShipment.isFinalized">YES</td>
-            <td *ngIf="!tempShipment.isFinalized"><button (click)="finalize(tempShipment.id, tempShipment.flightDate)" class="btn btn-success">Finalize</button></td>
+            <td *ngIf="!tempShipment.isFinalized"><button (click)="finalize(tempShipment.id, tempShipment.flightDate, tempShipment.bagsCount, tempShipment.countOfBagsWithoutParcels)" class="btn btn-success">Finalize</button></td>
         </tr>
     </tbody>
 </table>

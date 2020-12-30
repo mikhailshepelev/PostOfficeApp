@@ -7,11 +7,11 @@
         <div class="form-group">
             <label for="number">Number</label>
             <input type="text" class="form-control" id="number" required pattern="[a-zA-Z]{2}[0-9]{6}[a-zA-Z]{2}"
-                [(ngModel)]="parcel.number" name="number" #number="ngModel">
+                placeholder="Format 'LLNNNNNNLL', where L – letter, N – digit" [(ngModel)]="parcel.number" name="number" #number="ngModel">
             <div [hidden]="!number.errors?.required || number.untouched" class="alert alert-warning">
                 Number is required
             </div>
-            <div [hidden]="!number.errors?.pattern || number.untouched" class="alert alert-info">
+            <div [hidden]="!number.errors?.pattern || number.valid" class="alert alert-info">
                 Format should be: “LLNNNNNNLL”, where L – letter, N – digit
             </div>
         </div>
@@ -26,11 +26,11 @@
         <div class="form-group">
             <label for="destinationCountry">Destination Country</label>
             <input type="text" class="form-control" id="destinationCountry" required pattern="[A-Z]{2}"
-                [(ngModel)]="parcel.destinationCountry" name="destinationCountry" #destinationCountry="ngModel">
+                placeholder="2-letters code, e.g 'LV', 'EE', 'FI'" [(ngModel)]="parcel.destinationCountry" name="destinationCountry" #destinationCountry="ngModel">
             <div [hidden]="!destinationCountry.errors?.required || destinationCountry.untouched" class="alert alert-warning">
                 Destination Country field is required
             </div>
-            <div [hidden]="!destinationCountry.errors?.pattern || destinationCountry.untouched" class="alert alert-info">
+            <div [hidden]="!destinationCountry.errors?.pattern || destinationCountry.valid" class="alert alert-info">
                 Format should be: 2-letters code, e.g "LV", "EE", "FI"
             </div>
         </div>

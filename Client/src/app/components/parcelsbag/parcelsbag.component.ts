@@ -18,7 +18,6 @@ export class ParcelsbagComponent implements OnInit {
   constructor(
     private bagService: BagService,
     private route: ActivatedRoute,
-    private router: Router,
     private location: Location
   ) { }
 

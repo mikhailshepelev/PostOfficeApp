@@ -7,5 +7,7 @@ export class Shipment {
     flightNumber: string;
     flightDate: Date;
     isFinalized: boolean;  
-    bags: Bag[]; 
+    bags: Bag[];
+    bagsCount: number;
+    countOfBagsWithoutParcels: number;
 }

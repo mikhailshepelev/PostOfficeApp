@@ -13,5 +13,7 @@ namespace API.Model
         public DateTime FlightDate { get; set; }
         public IList<Bag> Bags { get; set; }
         public bool isFinalized  { get; set; }
+        public int bagsCount { get; set; }
+        public int countOfBagsWithoutParcels { get; set; }
     }
 }

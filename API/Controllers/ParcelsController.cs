@@ -16,6 +16,12 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<Parcel>> PostParcel(Parcel parcel)
         {
+            ParcelsBag bag = await _context.ParcelsBags.FindAsync(parcel.ParcelsBagId);
+            Shipment shipment = await _context.Shipments.FindAsync(bag.ShipmentId);
+            if (bag.ParcelsCount == 0) {
+                shipment.countOfBagsWithoutParcels--;
+            }
+            bag.ParcelsCount++;
             _context.Parcels.Add(parcel);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetParcel), new { id = parcel.Id }, parcel);

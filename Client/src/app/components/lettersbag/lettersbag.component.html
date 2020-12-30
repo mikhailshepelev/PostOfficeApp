@@ -11,7 +11,7 @@
             <div [hidden]="!number.errors?.required || number.untouched" class="alert alert-warning">
                 Number is required
             </div>
-            <div [hidden]="!number.errors?.pattern || number.untouched" class="alert alert-info">
+            <div [hidden]="!number.errors?.pattern || number.valid" class="alert alert-info">
                 No special symbols allowed
             </div>
         </div>
@@ -22,7 +22,7 @@
             <div [hidden]="!lettersCount.errors?.required || lettersCount.untouched" class="alert alert-warning">
                 Count of letters field is required
             </div>
-            <div [hidden]="!lettersCount.errors?.pattern || lettersCount.untouched" class="alert alert-warning">
+            <div [hidden]="!lettersCount.errors?.pattern || lettersCount.valid" class="alert alert-warning">
                 Letters count cannot be 0
             </div>
         </div>   

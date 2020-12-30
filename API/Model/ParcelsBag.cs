@@ -5,5 +5,6 @@ namespace API.Model
     public class ParcelsBag : Bag
     {
         public virtual IList<Parcel> Parcels { get; set; }
+        public int ParcelsCount { get; set; }
     }
 }

@@ -33,7 +33,7 @@ export class ShipmentComponent implements OnInit {
         .subscribe (
           data => {
             console.log(data)
-            this.router.navigate([''])
+            this.location.back();
           }
         )
   }
