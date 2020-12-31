@@ -12,6 +12,9 @@ import { ParcelsbagComponent } from './components/parcelsbag/parcelsbag.componen
 import { LettersbagComponent } from './components/lettersbag/lettersbag.component';
 import { ParcelsListComponent } from './components/parcels-list/parcels-list.component';
 import { ParcelComponent } from './components/parcel/parcel.component';
+import { ToastrModule } from 'ngx-toastr';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,12 @@ import { ParcelComponent } from './components/parcel/parcel.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right'
+    }),
+    FontAwesomeModule,
+    BrowserAnimationsModule
   ],
   providers: [
     ShipmentService

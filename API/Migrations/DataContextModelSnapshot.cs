@@ -112,7 +112,7 @@ namespace API.Migrations
 
                     b.Property<string>("Number")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("bagsCount")
                         .HasColumnType("int");
@@ -125,9 +125,6 @@ namespace API.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Number")
-                        .IsUnique();
-
                     b.ToTable("Shipments");
 
                     b.HasData(
@@ -135,7 +132,7 @@ namespace API.Migrations
                         {
                             Id = 1,
                             Airport = "TLL",
-                            FlightDate = new DateTime(2020, 12, 30, 19, 55, 57, 506, DateTimeKind.Local).AddTicks(1340),
+                            FlightDate = new DateTime(2020, 12, 31, 16, 7, 53, 123, DateTimeKind.Local).AddTicks(220),
                             FlightNumber = "dfsfdsf",
                             Number = "rtysdf",
                             bagsCount = 0,

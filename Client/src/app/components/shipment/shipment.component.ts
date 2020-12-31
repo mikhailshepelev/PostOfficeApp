@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { keys } from 'src/app/app.constants';
 import { Shipment } from 'src/app/model/shipment';
 import { ShipmentService } from 'src/app/services/shipment.service';
 import { Location } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-shipment',
@@ -18,8 +18,8 @@ export class ShipmentComponent implements OnInit {
 
   constructor(
     private shipmentService: ShipmentService,
-    private router: Router,
-    private location: Location
+    private location: Location,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -27,17 +27,15 @@ export class ShipmentComponent implements OnInit {
   }
 
   createShipment(){
-    console.log(this.shipment)
     this.shipmentService.createShipment(this.shipment)
         .subscribe (
           data => {
-            console.log(data)
             this.submitted = true;
             this.location.back();
           },
           error => {
-            console.log(error.error);
-          }     
+            this.toastr.error(error.error);
+          }
         )
   }
 

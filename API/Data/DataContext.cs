@@ -35,12 +35,6 @@ namespace API.Data
 
             builder.Entity<Bag>().Property("Discriminator");
 
-            builder.Entity<Shipment>().Property(t => t.Number).IsRequired();
-            builder.Entity<Shipment>().HasIndex(u => u.Number).IsUnique();
-            builder.Entity<Shipment>().Property(t => t.Airport).IsRequired();
-            builder.Entity<Shipment>().Property(t => t.FlightNumber).IsRequired();
-            builder.Entity<Shipment>().Property(t => t.FlightDate).IsRequired();
-
             builder.Entity<LettersBag>().Property(m => m.Weight).HasPrecision(18, 3);
 
             seedDatabase(builder);

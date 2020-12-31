@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Shipment } from 'src/app/model/shipment';
 import { ShipmentService } from 'src/app/services/shipment.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-shipments-list',
@@ -13,7 +14,8 @@ export class ShipmentsListComponent implements OnInit {
   shipments: Shipment[];
 
   constructor(private shipmentService: ShipmentService,
-    private router: Router) { }
+              private router: Router,
+              private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.listShipments();
@@ -37,11 +39,11 @@ export class ShipmentsListComponent implements OnInit {
 
   finalize(id: number, flightDate: Date, bagsCount: number, countOfBagsWithoutParcels: number) {
     if (this.compareDate(new Date(), flightDate) > 0) {
-      alert("This shipment cannot be finalized. Flight date cannot be in the past at the moment of finalizing. Create new shipment with correct flight date")
+      this.toastr.error("This shipment cannot be finalized. Flight date cannot be in the past at the moment of finalizing. Create new shipment with correct flight date")
     } else if (bagsCount <= 0) {
-      alert("There are no bags in this shipment. Please add bags and try again")
+      this.toastr.error("There are no bags in this shipment. Please add bags and try again")
     } else if (countOfBagsWithoutParcels > 0) {
-      alert("You have bags without parcels in this shipment. Please add at least one parcel to each bag and try again")
+      this.toastr.error("You have bags without parcels in this shipment. Please add at least one parcel to each bag and try again")
     } else {
       this.shipmentService.finalizeShipment(id).subscribe(
         data => {

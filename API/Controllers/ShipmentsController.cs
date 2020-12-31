@@ -35,7 +35,8 @@ namespace API.Controllers
             var shipment = await _context.Shipments.FindAsync(id);
             shipment.isFinalized = true;
             var bags = await _context.Bags.Where(b => b.ShipmentId == id).ToListAsync();
-            foreach (Bag bag in bags) {
+            foreach (Bag bag in bags)
+            {
                 bag.isFinalized = true;
             }
             await _context.SaveChangesAsync();
@@ -43,14 +44,20 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Shipment>> PostShipment(Shipment shipment)
+        public async Task<ActionResult<Shipment>> CreateShipment(Shipment shipment)
         {
-            Regex rgx = new Regex("[0-9A-Za-z]{3}-[0-9A-Za-z]{6}");
-            if (rgx.IsMatch(shipment.Number)) {
-                _context.Shipments.Add(shipment);
-                await _context.SaveChangesAsync();
+            if (await ShipmentExists(shipment.Number)) {
+                return BadRequest("Shipment with this number already exists");
             }
+            // Regex rgx = new Regex("[0-9A-Za-z]{3}-[0-9A-Za-z]{6}");
+            // if (rgx.IsMatch(shipment.Number)) {
+            _context.Shipments.Add(shipment);
+            await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetShipment), new { id = shipment.Id }, shipment);
+        }
+
+        private async Task<bool> ShipmentExists(string number) {
+            return await _context.Shipments.AnyAsync(x => x.Number == number);
         }
     }
 }
