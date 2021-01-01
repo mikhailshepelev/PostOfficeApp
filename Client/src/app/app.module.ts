@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule} from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ShipmentService } from './services/shipment.service';
 import { ShipmentsListComponent } from './components/shipments-list/shipments-list.component';
 import { ShipmentComponent } from './components/shipment/shipment.component';
@@ -15,6 +15,9 @@ import { ParcelComponent } from './components/parcel/parcel.component';
 import { ToastrModule } from 'ngx-toastr';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ErrorInterceptor } from './error-handling/error.interceptor';
+import { NotFoundComponent } from './error-handling/not-found/not-found.component';
+import { ServerErrorComponent } from './error-handling/server-error/server-error.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ParcelsbagComponent,
     LettersbagComponent,
     ParcelsListComponent,
-    ParcelComponent
+    ParcelComponent,
+    NotFoundComponent,
+    ServerErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +44,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule
   ],
   providers: [
-    ShipmentService
+    ShipmentService,
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true}
     ],
   bootstrap: [AppComponent]
 })

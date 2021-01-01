@@ -7,6 +7,8 @@ import { ParcelsListComponent } from './components/parcels-list/parcels-list.com
 import { ParcelsbagComponent } from './components/parcelsbag/parcelsbag.component';
 import { ShipmentComponent } from './components/shipment/shipment.component';
 import { ShipmentsListComponent } from './components/shipments-list/shipments-list.component';
+import { NotFoundComponent } from './error-handling/not-found/not-found.component';
+import { ServerErrorComponent } from './error-handling/server-error/server-error.component';
 
 
 const routes: Routes = [
@@ -16,7 +18,10 @@ const routes: Routes = [
   {path: 'shipment/:id/bags/parcelsbag', component: ParcelsbagComponent},
   {path: 'shipment/:id/bags/lettersbag', component: LettersbagComponent},
   {path: 'shipment/:shipmentid/bags/:bagid/parcels', component: ParcelsListComponent},
-  {path: 'shipment/:shipmentid/bags/:bagid/parcel', component: ParcelComponent}
+  {path: 'shipment/:shipmentid/bags/:bagid/parcel', component: ParcelComponent},
+  {path: 'not-found', component: NotFoundComponent},
+  {path: 'server-error', component: ServerErrorComponent},
+  {path: '**', component: NotFoundComponent}
 ]
 
 @NgModule({

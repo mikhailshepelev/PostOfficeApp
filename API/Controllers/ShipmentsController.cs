@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using API.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Text.RegularExpressions;
 using System.Linq;
 
 namespace API.Controllers
@@ -49,8 +48,6 @@ namespace API.Controllers
             if (await ShipmentExists(shipment.Number)) {
                 return BadRequest("Shipment with this number already exists");
             }
-            // Regex rgx = new Regex("[0-9A-Za-z]{3}-[0-9A-Za-z]{6}");
-            // if (rgx.IsMatch(shipment.Number)) {
             _context.Shipments.Add(shipment);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetShipment), new { id = shipment.Id }, shipment);
