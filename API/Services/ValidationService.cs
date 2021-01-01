@@ -55,5 +55,10 @@ namespace API.Services
         {
             return await _context.Bags.AnyAsync(x => x.Number == number);
         }
+
+        public async Task<bool> ParcelExists(string number)
+        {
+            return await _context.Parcels.AnyAsync(x => x.Number == number);
+        }
     }
 }

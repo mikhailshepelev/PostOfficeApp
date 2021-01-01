@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using API.Model;
 
 namespace API.Services
 {
@@ -13,5 +11,6 @@ namespace API.Services
         Task<bool> ShipmentHasBagsWithoutParcels(int shipmentId);
         Task<bool> ShipmentHasNoBags(int shipmentId);
         Task<bool> BagExists(string number);
+        Task<bool> ParcelExists(string number);
     }
 }

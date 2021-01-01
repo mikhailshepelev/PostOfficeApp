@@ -4,8 +4,6 @@ import { Bag } from 'src/app/model/bag';
 import { Parcel } from 'src/app/model/parcel';
 import { BagService } from 'src/app/services/bag.service';
 import { Location } from '@angular/common';
-import { Shipment } from 'src/app/model/shipment';
-import { ShipmentService } from 'src/app/services/shipment.service';
 
 @Component({
   selector: 'app-parcels-list',

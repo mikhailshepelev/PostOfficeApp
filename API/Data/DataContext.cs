@@ -9,7 +9,7 @@ namespace API.Data
         public DataContext(DbContextOptions options) : base(options)
         {
         }
-
+        
         public DbSet<Parcel> Parcels { get; set; }
         public DbSet<ParcelsBag> ParcelsBags { get; set; }
         public DbSet<LettersBag> LettersBags { get; set; }
@@ -20,22 +20,8 @@ namespace API.Data
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<Bag>(entity =>
-            {
-                entity.HasOne(d => d.Shipment)
-                    .WithMany(p => p.Bags)
-                    .HasForeignKey("ShipmentId");
-            });
-            builder.Entity<Parcel>(entity =>
-            {
-                entity.HasOne(d => d.ParcelsBag)
-                    .WithMany(p => p.Parcels)
-                    .HasForeignKey("ParcelsBagId");
-            });
-
-            builder.Entity<Bag>().Property("Discriminator");
-
             builder.Entity<LettersBag>().Property(m => m.Weight).HasPrecision(18, 3);
+            builder.Entity<Parcel>().Property(m => m.Weight).HasPrecision(18, 3);
 
             seedDatabase(builder);
         }

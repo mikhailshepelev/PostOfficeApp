@@ -9,5 +9,4 @@ export class Shipment {
     isFinalized: boolean;  
     bags: Bag[];
     bagsCount: number;
-    countOfBagsWithoutParcels: number;
 }

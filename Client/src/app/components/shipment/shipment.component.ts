@@ -3,6 +3,7 @@ import { keys } from 'src/app/app.constants';
 import { Shipment } from 'src/app/model/shipment';
 import { ShipmentService } from 'src/app/services/shipment.service';
 import { Location } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-shipment',
@@ -17,7 +18,8 @@ export class ShipmentComponent implements OnInit {
 
   constructor(
     private shipmentService: ShipmentService,
-    private location: Location
+    private location: Location,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -29,6 +31,7 @@ export class ShipmentComponent implements OnInit {
         .subscribe (
           data => {
             this.submitted = true;
+            this.toastr.success("Shipment has been succesfully created!")
             this.location.back();
           }
         )

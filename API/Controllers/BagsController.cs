@@ -49,7 +49,7 @@ namespace API.Controllers
             {
                 return BadRequest("Bag with this number already exists");
             }
-            setUpCorrectParcelsBagProperties(bag);
+            setUpCorrectBagProperties(bag);
 
             _context.ParcelsBags.Add(bag);
             await _context.SaveChangesAsync();
@@ -67,14 +67,14 @@ namespace API.Controllers
             {
                 return BadRequest("Bag with this number already exists");
             }
-            setUpCorrectParcelsBagProperties(bag);
+            setUpCorrectBagProperties(bag);
 
             _context.LettersBags.Add(bag);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetBag), new { id = bag.Id }, bag);
         }
 
-        private void setUpCorrectParcelsBagProperties(Bag bag)
+        private void setUpCorrectBagProperties(Bag bag)
         {
             if (bag.Discriminator == Constants.ParcelsBagDiscriminator) {
                 ParcelsBag tempBag = (ParcelsBag) bag;

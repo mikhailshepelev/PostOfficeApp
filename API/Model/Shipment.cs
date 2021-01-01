@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API.Model
 {
@@ -12,7 +11,6 @@ namespace API.Model
 
         [Required]
         [RegularExpression("[0-9A-Za-z]{3}-[0-9A-Za-z]{6}")]
-        [Index(IsUnique = true)]
         public string Number { get; set; }
 
         [Required]
@@ -24,7 +22,9 @@ namespace API.Model
 
         [Required]
         public DateTime FlightDate { get; set; }
+
         public IList<Bag> Bags { get; set; }
+
         public bool isFinalized  { get; set; }
     }
 }

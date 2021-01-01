@@ -4,6 +4,7 @@ import { Bag } from 'src/app/model/bag';
 import { BagService } from 'src/app/services/bag.service';
 import { Location } from '@angular/common';
 import { lettersBagDiscriminator } from 'src/app/app.constants';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-lettersbag',
@@ -19,7 +20,8 @@ export class LettersbagComponent implements OnInit {
   constructor(
     private bagService: BagService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -34,6 +36,7 @@ export class LettersbagComponent implements OnInit {
         .subscribe (
           data => {
             this.submitted = true;
+            this.toastr.success("Bag has been succesfully created!")
             this.location.back()
           }
         )

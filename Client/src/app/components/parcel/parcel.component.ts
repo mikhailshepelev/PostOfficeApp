@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Parcel } from 'src/app/model/parcel';
 import { ParcelService } from 'src/app/services/parcel.service';
 import { Location } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-parcel',
@@ -18,7 +19,8 @@ export class ParcelComponent implements OnInit {
   constructor(
     private parcelService: ParcelService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -32,6 +34,7 @@ export class ParcelComponent implements OnInit {
         .subscribe (
           data => {
             this.submitted = true
+            this.toastr.success("Parcel has been succesfully created!")
             this.location.back()
           }
         )
