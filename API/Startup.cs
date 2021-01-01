@@ -1,5 +1,6 @@
 using API.Data;
 using API.Middleware;
+using API.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -41,6 +42,7 @@ namespace API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
             });
 
+            services.AddScoped<IValidationService, ValidationService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

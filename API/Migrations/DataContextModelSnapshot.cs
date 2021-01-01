@@ -101,7 +101,7 @@ namespace API.Migrations
 
                     b.Property<string>("Airport")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(24)");
 
                     b.Property<DateTime>("FlightDate")
                         .HasColumnType("datetime2");
@@ -132,7 +132,7 @@ namespace API.Migrations
                         {
                             Id = 1,
                             Airport = "TLL",
-                            FlightDate = new DateTime(2020, 12, 31, 16, 7, 53, 123, DateTimeKind.Local).AddTicks(220),
+                            FlightDate = new DateTime(2021, 1, 1, 14, 11, 39, 590, DateTimeKind.Local).AddTicks(180),
                             FlightNumber = "dfsfdsf",
                             Number = "rtysdf",
                             bagsCount = 0,
