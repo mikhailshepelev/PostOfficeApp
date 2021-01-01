@@ -86,6 +86,7 @@ namespace API.Controllers
                 ParcelsBag tempBag = (ParcelsBag) bag;
                 tempBag.ParcelsCount = 0;
                 tempBag.isFinalized = false;
+                tempBag.Parcels = null;
             } else {
                 bag.isFinalized = false;
             }    
