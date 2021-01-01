@@ -28,5 +28,7 @@ namespace API.Model
         public int ParcelsBagId { get; set; }
 
         public ParcelsBag ParcelsBag { get; set; }
+
+        public bool isFinalized  { get; set; }
     }
 }

@@ -27,6 +27,9 @@ namespace API.Controllers
             {
                 return BadRequest("Parcel with this number already exists");
             }
+            if (parcel.isFinalized) {
+                return BadRequest("Cannot add parcel. Shipment with this parcel is already finalized");
+            }
             await setUpCorrectParcelProperties(parcel);
 
             _context.Parcels.Add(parcel);
@@ -36,9 +39,10 @@ namespace API.Controllers
 
         private async Task setUpCorrectParcelProperties(Parcel parcel)
         {
+            parcel.isFinalized = false;
             ParcelsBag bag = await _context.ParcelsBags.FindAsync(parcel.ParcelsBagId);
             if (bag != null) {
-                bag.ParcelsCount++;
+                bag.ParcelsCount++;    
             }
         }
 

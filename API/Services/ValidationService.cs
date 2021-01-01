@@ -39,9 +39,11 @@ namespace API.Services
         }
 
         public async Task<bool> ShipmentHasBagsWithoutParcels(int shipmentId) {
-            List<ParcelsBag> bags = await _context.ParcelsBags.Include(t => t.Parcels).Where(b => b.ShipmentId == shipmentId).ToListAsync();
-            foreach(ParcelsBag bag in bags) {
-                return bag.Parcels.Count == 0;
+            var bags = await _context.ParcelsBags.Where(b => b.ShipmentId == shipmentId).ToListAsync();
+            foreach(var bag in bags) {
+                if (bag.ParcelsCount == 0) {
+                    return true;
+                }
             }
             return false;
         }

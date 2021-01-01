@@ -49,10 +49,7 @@ namespace API.Controllers
                 return BadRequest("You have bags without parcels in this shipment. Please add at least one parcel to each bag and try again");
             }
 
-            var bags = await _context.Bags.Where(b => b.ShipmentId == id).ToListAsync();
-            
-            shipment.isFinalized = true;
-            bags.ForEach(b => b.isFinalized = true);
+            await finalizeProperties(shipment);
             
             await _context.SaveChangesAsync();
             return Ok();
@@ -83,6 +80,21 @@ namespace API.Controllers
         {
             shipment.Bags = null;
             shipment.isFinalized = false;
+        }
+
+        private async Task finalizeProperties(Shipment shipment)
+        {
+            shipment.isFinalized = true;
+            
+            var bags = await _context.Bags.Where(b => b.ShipmentId == shipment.Id).ToListAsync();
+            bags.ForEach(b => b.isFinalized = true);
+
+            foreach(Bag bag in bags) {
+                if (bag.Discriminator.Equals(Constants.ParcelsBagDiscriminator)) {
+                    var parcels = await _context.Parcels.Where(b => b.ParcelsBagId == bag.Id).ToListAsync();
+                    parcels.ForEach(b => b.isFinalized = true);
+                }
+            }
         }
     }
 }
