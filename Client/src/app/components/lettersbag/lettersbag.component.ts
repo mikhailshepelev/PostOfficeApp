@@ -30,10 +30,10 @@ export class LettersbagComponent implements OnInit {
   }
 
   createBag() {
-    this.submitted = true;
     this.bagService.createLettersBag(this.bag)
         .subscribe (
           data => {
+            this.submitted = true;
             this.location.back()
           }
         )

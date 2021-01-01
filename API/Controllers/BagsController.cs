@@ -4,14 +4,17 @@ using System.Threading.Tasks;
 using API.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using API.Services;
 
 namespace API.Controllers
 {
     public class BagsController : BaseApiController
     {
         private readonly DataContext _context;
-        public BagsController(DataContext context)
+        private readonly IValidationService _validationService;
+        public BagsController(DataContext context, IValidationService validationService)
         {
+            _validationService = validationService;
             _context = context;
         }
 
@@ -38,8 +41,17 @@ namespace API.Controllers
         [HttpPost("parcelsbag")]
         public async Task<ActionResult<ParcelsBag>> PostParcelsBag(ParcelsBag bag)
         {
+            if (bag == null)
+            {
+                return BadRequest("Bag is null");
+            }
+            if (await _validationService.BagExists(bag.Number))
+            {
+                return BadRequest("Bag with this number already exists");
+            }
+            setUpCorrectParcelsBagProperties(bag);
+
             _context.ParcelsBags.Add(bag);
-            await ChangeCountProperties(bag);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetBag), new { id = bag.Id }, bag);
         }
@@ -47,22 +59,30 @@ namespace API.Controllers
         [HttpPost("lettersbag")]
         public async Task<ActionResult<LettersBag>> PostLettersBag(LettersBag bag)
         {
+            if (bag == null)
+            {
+                return BadRequest("Bag is null");
+            }
+            if (await _validationService.BagExists(bag.Number))
+            {
+                return BadRequest("Bag with this number already exists");
+            }
+            setUpCorrectParcelsBagProperties(bag);
+
             _context.LettersBags.Add(bag);
-            await ChangeCountProperties(bag);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetBag), new { id = bag.Id }, bag);
         }
 
-        private async Task<ActionResult<Shipment>> ChangeCountProperties(Bag bag) {
-            Shipment shipment = await _context.Shipments.FindAsync(bag.ShipmentId);
+        private void setUpCorrectParcelsBagProperties(Bag bag)
+        {
             if (bag.Discriminator == Constants.ParcelsBagDiscriminator) {
-                shipment.bagsCount++;
-                shipment.countOfBagsWithoutParcels++;
+                ParcelsBag tempBag = (ParcelsBag) bag;
+                tempBag.ParcelsCount = 0;
+                tempBag.isFinalized = false;
             } else {
-                shipment.bagsCount++;
-            }
-            return shipment;
+                bag.isFinalized = false;
+            }    
         }
-
     }
 }

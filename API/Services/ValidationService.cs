@@ -25,7 +25,7 @@ namespace API.Services
         {
             foreach (string s in Enum.GetNames(typeof(Airport)))
             {
-                if (airport == s)
+                if (airport.Equals(s))
                 {
                     return true;
                 }
@@ -39,13 +39,21 @@ namespace API.Services
         }
 
         public async Task<bool> ShipmentHasBagsWithoutParcels(int shipmentId) {
-            List<ParcelsBag> bags = await _context.ParcelsBags.Where(b => b.ShipmentId == shipmentId).ToListAsync();
+            List<ParcelsBag> bags = await _context.ParcelsBags.Include(t => t.Parcels).Where(b => b.ShipmentId == shipmentId).ToListAsync();
             foreach(ParcelsBag bag in bags) {
-                if (bag.ParcelsCount == 0) {
-                    return true;
-                }
+                return bag.Parcels.Count == 0;
             }
             return false;
+        }
+
+        public async Task<bool> ShipmentHasNoBags(int shipmentId) {
+            List<Bag> bags = await _context.Bags.Where(b => b.ShipmentId == shipmentId).ToListAsync();
+            return bags.Count == 0;
+        }
+
+        public async Task<bool> BagExists(string number)
+        {
+            return await _context.Bags.AnyAsync(x => x.Number == number);
         }
     }
 }

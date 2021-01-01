@@ -30,11 +30,11 @@ export class ParcelsbagComponent implements OnInit {
   }
 
   createBag() {
-    this.submitted = true;
     this.bagService.createParcelsBag(this.bag)
         .subscribe (
           data => {
-            this.location.back()
+            this.submitted = true;
+            this.location.back();
           }
         )
   }

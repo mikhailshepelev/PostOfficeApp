@@ -28,10 +28,10 @@ export class ParcelComponent implements OnInit {
   }
 
   createParcel() {
-    this.submitted = true;
     this.parcelService.createParcel(this.parcel)
         .subscribe (
           data => {
+            this.submitted = true
             this.location.back()
           }
         )

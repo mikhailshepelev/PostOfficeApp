@@ -37,20 +37,13 @@ export class ShipmentsListComponent implements OnInit {
     this.router.navigate(['shipment'])
   }
 
-  finalize(id: number, flightDate: Date, bagsCount: number, countOfBagsWithoutParcels: number) {
-    if (this.compareDate(new Date(), flightDate) > 0) {
-      this.toastr.error("This shipment cannot be finalized. Flight date cannot be in the past at the moment of finalizing. Create new shipment with correct flight date")
-    } else if (bagsCount <= 0) {
-      this.toastr.error("There are no bags in this shipment. Please add bags and try again")
-    } else if (countOfBagsWithoutParcels > 0) {
-      this.toastr.error("You have bags without parcels in this shipment. Please add at least one parcel to each bag and try again")
-    } else {
+  finalize(id: number) {
       this.shipmentService.finalizeShipment(id).subscribe(
         data => {
+          this.toastr.success("Shipment has been succesfully finalized!")
           this.listShipments()
         }
       );
-    }
   }
 
   compareDate(date1: Date, date2: Date): number {

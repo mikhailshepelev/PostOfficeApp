@@ -11,5 +11,7 @@ namespace API.Services
         bool AirportIsEligible(string airport);
         bool DateIsIneligible(DateTime flightDate);
         Task<bool> ShipmentHasBagsWithoutParcels(int shipmentId);
+        Task<bool> ShipmentHasNoBags(int shipmentId);
+        Task<bool> BagExists(string number);
     }
 }

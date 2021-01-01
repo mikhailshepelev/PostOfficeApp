@@ -31,10 +31,6 @@ namespace API.Controllers
 
         private async Task<ActionResult<Shipment>> ChangeCountProperties(ParcelsBag bag) {
             Shipment shipment = await _context.Shipments.FindAsync(bag.ShipmentId);
-            if (bag.ParcelsCount == 0) {
-                shipment.countOfBagsWithoutParcels--;
-            }
-            bag.ParcelsCount++;
             return shipment;
         }
     }

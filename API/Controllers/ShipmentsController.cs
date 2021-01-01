@@ -42,7 +42,7 @@ namespace API.Controllers
             if (_validationService.DateIsIneligible(shipment.FlightDate)) {
                 return BadRequest("This shipment cannot be finalized. Flight date cannot be in the past at the moment of finalizing. Create new shipment with correct flight date");
             }
-            if (shipment.bagsCount == 0) {
+            if (await _validationService.ShipmentHasNoBags(shipment.Id)) {
                 return BadRequest("There are no bags in this shipment. Please add bags and try again");
             }
             if (await _validationService.ShipmentHasBagsWithoutParcels(shipment.Id)) {
@@ -61,11 +61,14 @@ namespace API.Controllers
         [HttpPost]
         public async Task<ActionResult<Shipment>> CreateShipment(Shipment shipment)
         {
+            if (shipment == null) {
+                return BadRequest("Shipment is null");
+            }
             if (await _validationService.ShipmentExists(shipment.Number))
             {
                 return BadRequest("Shipment with this number already exists");
             }
-            if (_validationService.AirportIsEligible(shipment.Airport))
+            if (!_validationService.AirportIsEligible(shipment.Airport))
             {
                 return BadRequest("Airport field has ineligible value");
             }
@@ -79,8 +82,6 @@ namespace API.Controllers
         private void setUpCorrectShipmentProperties(Shipment shipment)
         {
             shipment.Bags = null;
-            shipment.bagsCount = 0;
-            shipment.countOfBagsWithoutParcels = 0;
             shipment.isFinalized = false;
         }
     }
