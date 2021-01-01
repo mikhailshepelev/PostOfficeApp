@@ -31,17 +31,16 @@ namespace API.Data
             Shipment shipment = new Shipment
             {
                 Id = 1,
-                Number = "rtysdf",
+                Number = "ADN-769096",
                 Airport = "TLL",
-                FlightNumber = "dfsfdsf",
-                FlightDate = DateTime.Now,
-                isFinalized = false
+                FlightNumber = "TY8765",
+                FlightDate = DateTime.Now.AddMonths(1),
             };
-            ParcelsBag parcelsBag = new ParcelsBag { Id = 1, Number = "AAA445", ShipmentId = 1 };
+            ParcelsBag parcelsBag = new ParcelsBag { Id = 1, Number = "JK78", ShipmentId = 1, ParcelsCount = 1 };
             LettersBag lettersBag = new LettersBag
             {
                 Id = 2,
-                Number = "HHDF53",
+                Number = "UY01",
                 LettersCount = 34,
                 Weight = 4.563M,
                 Price = 6.56M,
@@ -51,10 +50,10 @@ namespace API.Data
             Parcel parcel = new Parcel
             {
                 Id = 1,
-                Number = "1DD45",
-                RecipientName = "Michael",
-                DestinationCountry = "USA",
-                Weight = 2.45M,
+                Number = "NJ905612UM",
+                RecipientName = "John Appleseed",
+                DestinationCountry = "US",
+                Weight = 2.459M,
                 Price = 3.45M,
                 ParcelsBagId = 1
             };
