@@ -20,10 +20,10 @@ namespace API.Model
         public string DestinationCountry { get; set; }
 
         [Required]
-        public double Weight { get; set; }
+        public decimal Weight { get; set; }
 
         [Required]
-        public double Price { get; set; }
+        public decimal Price { get; set; }
 
         public int ParcelsBagId { get; set; }
 

@@ -9,7 +9,7 @@ namespace API.Data
         public DataContext(DbContextOptions options) : base(options)
         {
         }
-        
+
         public DbSet<Parcel> Parcels { get; set; }
         public DbSet<ParcelsBag> ParcelsBags { get; set; }
         public DbSet<LettersBag> LettersBags { get; set; }
@@ -54,8 +54,8 @@ namespace API.Data
                 Number = "1DD45",
                 RecipientName = "Michael",
                 DestinationCountry = "USA",
-                Weight = 2.45,
-                Price = 3.45,
+                Weight = 2.45M,
+                Price = 3.45M,
                 ParcelsBagId = 1
             };
 

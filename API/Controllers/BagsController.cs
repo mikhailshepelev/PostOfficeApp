@@ -49,6 +49,9 @@ namespace API.Controllers
             {
                 return BadRequest("Bag with this number already exists");
             }
+            if (bag.isFinalized) {
+                return BadRequest("Cannot add bag. Shipment with this bag is already finalized");
+            }
             setUpCorrectBagProperties(bag);
 
             _context.ParcelsBags.Add(bag);
@@ -66,6 +69,9 @@ namespace API.Controllers
             if (await _validationService.BagExists(bag.Number))
             {
                 return BadRequest("Bag with this number already exists");
+            }
+            if (bag.isFinalized) {
+                return BadRequest("Cannot add bag. Shipment with this bag is already finalized");
             }
             setUpCorrectBagProperties(bag);
 
