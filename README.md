@@ -1,21 +1,21 @@
 # Post office application
 
 ## About
-This application is an example of post office web-site. It is developed for managing shipments, bags, parcels and letters in a post office. Main entity of this application is shipment, which can include bags. Bags can contain parcels or letters. Application represents basic GET and POST requests for fetching and creating units from database.
+This application is an example of post office web-site. It is developed for managing shipments, bags, parcels and letters in a post office. Main entity of this application is shipment, which can include bags. Bags can contain parcels or letters. Application represents basic GET and POST requests for fetching units from and inserting to database.
 
 ## Installation and usage
 Before running an application, make sure that you downloaded and installed:
-1. [.Net 5.0.1](https://dotnet.microsoft.com/download)
-2. [SQL server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
-3. [Visual Studio Code](https://code.visualstudio.com)
-4. [Node.Js](https://nodejs.org/en/)
+1.  [.Net 5.0.1](https://dotnet.microsoft.com/download)
+2.  [SQL server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
+3.  [Visual Studio Code](https://code.visualstudio.com)
+4.  [Node.Js](https://nodejs.org/en/)
 
 Open this repository in Visual Studio Code by clicking on "clone repository" button in "welcome" pane.
 
 ### To setup and run back-end
-1. Open Visual studio code, open "Extensions" pane and install "C#" and "SQL Server (mssql)" extentions.
+1. Open Visual studio code, open "Extentions" pane, install "C#" and "SQL Server (mssql)" extentions.
 2. Open terminal/command line at "API" folder.
-3. Run following command to allow use terminal for entity framework:
+3. Run following command to allow use terminal/command line for entity framework:
 ```bash
 dotnet tool install --global dotnet-ef --version 5.0.1
 ```
@@ -31,7 +31,7 @@ dotnet run
 ```
 
 ### To setup and run front-end
-1. Install angular by executing following command in terminal/command line:
+1. Install angular by executing following command in terminal/command line (you can find more information [here](https://angular.io/guide/setup-local):
 ```bash
 npm install -g @angular/cli
 ```
