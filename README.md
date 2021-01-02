@@ -46,5 +46,5 @@ ng serve --open
 ```
 5. Your browser will be opened at http://localhost:4200. You can navigate through app by using this address.
 
-##Author
+## Author
 [Mikhail Shepelev](https://github.com/mikhailshepelev)
