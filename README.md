@@ -31,7 +31,7 @@ dotnet run
 ```
 
 ### To setup and run front-end
-1. Install angular by executing following command in terminal/command line (you can find more information [here](https://angular.io/guide/setup-local):
+1. Install angular by executing following command in terminal/command line (you can find more information [here](https://angular.io/guide/setup-local)
 ```bash
 npm install -g @angular/cli
 ```
