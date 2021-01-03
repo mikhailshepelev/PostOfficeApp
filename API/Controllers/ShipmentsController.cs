@@ -88,13 +88,6 @@ namespace API.Controllers
             
             var bags = await _context.Bags.Where(b => b.ShipmentId == shipment.Id).ToListAsync();
             bags.ForEach(b => b.isFinalized = true);
-
-            foreach(Bag bag in bags) {
-                if (bag.Discriminator.Equals(Constants.ParcelsBagDiscriminator)) {
-                    var parcels = await _context.Parcels.Where(b => b.ParcelsBagId == bag.Id).ToListAsync();
-                    parcels.ForEach(b => b.isFinalized = true);
-                }
-            }
         }
     }
 }

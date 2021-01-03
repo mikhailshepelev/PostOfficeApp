@@ -12,5 +12,6 @@ namespace API.Services
         Task<bool> ShipmentHasNoBags(int shipmentId);
         Task<bool> BagExists(string number);
         Task<bool> ParcelExists(string number);
+        Task<bool> IsBagFinalized(int parcelsBagId);
     }
 }

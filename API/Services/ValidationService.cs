@@ -62,5 +62,10 @@ namespace API.Services
         {
             return await _context.Parcels.AnyAsync(x => x.Number == number);
         }
+        public async Task<bool> IsBagFinalized(int parcelsBagId)
+        {
+            ParcelsBag bag = await _context.ParcelsBags.SingleOrDefaultAsync(x => x.Id == parcelsBagId);
+            return bag.isFinalized;
+        }
     }
 }
