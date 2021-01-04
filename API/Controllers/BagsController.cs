@@ -39,7 +39,7 @@ namespace API.Controllers
         }
 
         [HttpPost("parcelsbag")]
-        public async Task<ActionResult<ParcelsBag>> PostParcelsBag(ParcelsBag bag)
+        public async Task<ActionResult<ParcelsBag>> CreateParcelsBag(ParcelsBag bag)
         {
             if (bag == null)
             {
@@ -60,7 +60,7 @@ namespace API.Controllers
         }
 
         [HttpPost("lettersbag")]
-        public async Task<ActionResult<LettersBag>> PostLettersBag(LettersBag bag)
+        public async Task<ActionResult<LettersBag>> CreateLettersBag(LettersBag bag)
         {
             if (bag == null)
             {

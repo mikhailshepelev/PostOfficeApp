@@ -17,7 +17,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Parcel>> PostParcel(Parcel parcel)
+        public async Task<ActionResult<Parcel>> CreateParcel(Parcel parcel)
         {
             if (parcel == null)
             {
